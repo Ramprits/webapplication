@@ -8,9 +8,10 @@ using WebApplication.Data;
 namespace WebApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170729060518_Department")]
+    partial class Department
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -138,10 +139,6 @@ namespace WebApplication.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -186,10 +183,6 @@ namespace WebApplication.Data.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<byte[]>("rowVirsion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
                     b.HasKey("DepartmentId");
 
                     b.ToTable("Department");
@@ -197,7 +190,7 @@ namespace WebApplication.Data.Migrations
 
             modelBuilder.Entity("WebApplication.ViewModel.Employee", b =>
                 {
-                    b.Property<int>("EmployeeId")
+                    b.Property<int>("EmployeeID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("DepartmentsDepartmentId");
@@ -212,11 +205,7 @@ namespace WebApplication.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<byte[]>("rowVirsion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.HasKey("EmployeeId");
+                    b.HasKey("EmployeeID");
 
                     b.HasIndex("DepartmentsDepartmentId");
 

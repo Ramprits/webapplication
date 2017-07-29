@@ -8,9 +8,10 @@ using WebApplication.Data;
 namespace WebApplication.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170729053712_Employees")]
+    partial class Employees
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -138,10 +139,6 @@ namespace WebApplication.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
@@ -177,48 +174,18 @@ namespace WebApplication.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("WebApplication.ViewModel.Department", b =>
-                {
-                    b.Property<int>("DepartmentId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Location");
-
-                    b.Property<string>("Name");
-
-                    b.Property<byte[]>("rowVirsion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.HasKey("DepartmentId");
-
-                    b.ToTable("Department");
-                });
-
             modelBuilder.Entity("WebApplication.ViewModel.Employee", b =>
                 {
                     b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("DepartmentsDepartmentId");
+                    b.Property<string>("Email");
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<int>("Mobile");
 
-                    b.Property<string>("Mobile")
-                        .IsRequired()
-                        .HasMaxLength(10);
-
-                    b.Property<string>("Name")
-                        .IsRequired();
-
-                    b.Property<byte[]>("rowVirsion")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
+                    b.Property<string>("Name");
 
                     b.HasKey("EmployeeId");
-
-                    b.HasIndex("DepartmentsDepartmentId");
 
                     b.ToTable("Employee");
                 });
@@ -258,13 +225,6 @@ namespace WebApplication.Data.Migrations
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("WebApplication.ViewModel.Employee", b =>
-                {
-                    b.HasOne("WebApplication.ViewModel.Department", "Departments")
-                        .WithMany("Employees")
-                        .HasForeignKey("DepartmentsDepartmentId");
                 });
         }
     }

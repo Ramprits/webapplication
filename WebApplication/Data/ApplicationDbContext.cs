@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebApplication.Models;
+using WebApplication.ViewModel;
 
 namespace WebApplication.Data
 {
@@ -14,6 +11,9 @@ namespace WebApplication.Data
             : base(options)
         {
         }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Department> Department { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -22,5 +22,6 @@ namespace WebApplication.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
     }
 }
